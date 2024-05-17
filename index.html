@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 이서윤체 폰트 적용을 위한 코드 */
+        /* @font-face {
+          font-family: "LeeSeoyun";
+          src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff")
+            format("woff");
+          font-weight: normal;
+          font-style: normal;
+        } */
+        /* body태그 자체에 css 요소 부여 */
+        
+        
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+
+
+        body {
+            font-family: Bebas Neue;
+            margin: 0;
+            display: flex;
+            justify-content: center; /*가운데에 위치*/
+            background-image: url("./bg.png");
+            background-size :cover;
+            }
+            /* 너비는 390픽셀이구, 배경색이 좀 필요하고 부모(body) 높이 전체를 쓸거야 */
+
+        .container {
+            width: 395px; /*핸드폰너비 */
+            background-color:white;
+            height: 100%; /*컨테이너를 둘러싸고 있는게 바디태그인데 바디태그의 100%만큼*/
+            
+        }
+        .photos{margin-top: 30px;}
+
+        .photo-frame{
+            background-color: white;
+            margin:15px 20px;
+            height:200px;
+            background-size: cover;
+            position:relative;/*photo-frame아래에 있는 div들과의 관계성을 나타내기 위해*/
+            cursor:pointer
+        }
+
+        .footer{display:flex;
+            flex-direction:column; /*위아래로*/
+            align-items: center;/*가운데로*/
+            }
+        
+        .f-title{
+            font-size: 25px;
+            font-weight: 900;/*굵게*/
+            color: black;
+        }
+
+        .f-date{
+            font-size: 15px;
+            font-weight: 500;/*굵게*/
+            color: black
+        }
+        #image1{
+            background-image: url("./cel.png");
+        }
+
+        #image2{
+            background-image: url("./jc.png");
+        }
+        #image3{
+            background-image: url("./realisation.jpg");
+        }
+        
+        .photo-description {
+            color:black;
+            background-color: white;
+            width:max-content;/*안에 있는 글자에 맞는 너비*/
+            padding: 0px 20px;/* 좌우여백*/
+            margin-bottom: 3px;
+            border-radius:10px;
+            position : absolute; /*포토프레임을 기준으로 바텀, margin10줬었음*/
+            bottom : 0;/*가장 아래에서 0만큼 올라와라*/
+            transform:translate(-50%);
+            left: 50%;
+            opacity:0;
+            
+        }
+        .video{width:100%;
+        height:100%;}
+
+        .showText {
+            opacity:1
+
+        }/*불투명도:1->완전 불투명, 잘 안보임*/
+        .hideText {
+            opacity:0;
+            transition: opacity 0.5 linear; /*마우스가 보이는 애니메이션*/
+
+
+        }
+        /*불투명도:0->불투명*/
+          </style>
+          <script>// 텍스트가 보여지는 기능
+            // 1. 몇 번째 사진에 마우스가 올라갔는지 확인(if문)
+            // 2. 해당 사진을 찾아 hideText class를 지워주고, showText는 삽입해줌
+            function showText(number) {
+              if (number === 1) {
+                document.querySelector("#desc1").classList.remove("hideText");
+                document.querySelector("#desc1").classList.add("showText");
+              } else if (number === 2) {
+                document.querySelector("#desc2").classList.remove("hideText");
+                document.querySelector("#desc2").classList.add("showText");
+              } else {
+                document.querySelector("#desc3").classList.remove("hideText");
+                document.querySelector("#desc3").classList.add("showText");
+              }
+            }
+            
+            // 텍스트가 감춰지는 기능
+            // 1. 몇 번째 사진에서 마우스가 벗어났는지 확인(if문)
+            // 2. 해당 사진을 찾아 shotText class를 지워주고, hideText는 삽입해줌
+            function hideText(number) {
+              if (number === 1) {
+                document.querySelector("#desc1").classList.remove("showText");
+                document.querySelector("#desc1").classList.add("hideText");
+              } else if (number === 2) {
+                document.querySelector("#desc2").classList.remove("showText");
+                document.querySelector("#desc2").classList.add("hideText");
+              } else {
+                document.querySelector("#desc3").classList.remove("showText");
+                document.querySelector("#desc3").classList.add("hideText");
+              }
+            }
+            
+            // 클릭 기능
+            // 1. 선택된 사진의 숫자를 가진 텍스트를 alert 형태로 출력해줌
+            function alertText(number) {
+                if (number === 1){
+                    alert("Celine is a French luxury fashion house founded in 1945 by designer Céline Vipiana.")
+                }
+                else{
+                    alert("Simon Porte Jacquemus is a French fashion designer and the founder of the Jacquemus fashion label.")
+                }
+
+
+
+            }</script>
+</head>
+<body>
+    <div class="container">
+        <div class="photos">
+        <div id="image1" class="photo-frame" onmouseover="showText(1)"
+        onmouseout="hideText(1)"
+        onclick="alertText(1)">
+            <span id="desc1" class="photo-description">
+                CELINE
+            </span>
+        </div>
+            
+            
+        <div id="image2" class="photo-frame" onmouseover="showText(2)"
+        onmouseout="hideText(2)"
+        onclick="alertText(2)">
+            <span id="desc2" class="photo-description">
+                JACQUEMUS
+            </span>
+        </div>
+
+        <div id="image3" class="photo-frame">
+            <iframe class="video"
+		src="https://www.youtube.com/embed/Wh7ab7-Gf_E?si=wmHrZ1vFUAqiXH7At" frameborder="0"></iframe>
+        </div>
+        
+
+        <!-- <div  class="photo-frame" >
+            src : source, 즉 자료의 원천이 어디있는지를 의미해요! -->
+
+<div id="image4" class="photo-frame">
+	<iframe class="video"
+		src="https://www.youtube.com/embed/juhscgB-RSE?si=68V3x4IHBg8uNQ8t" title="YouTube video player"
+    frameborder="0"
+	></iframe>
+    
+
+
+</div>
+        </div>
+        <div class="footer">
+            <p class="f-title">My Favorite Fashion Brand</p>
+            <p class="f-date">2024</p>
+        </div>
+        
+        
+        
+        
+        
+        
+    </div>
+  
+</body>
+</html>
